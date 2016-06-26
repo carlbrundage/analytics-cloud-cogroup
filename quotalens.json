@@ -1,0 +1,26 @@
+{
+    "name": "Quota",
+    "label": "Quota",
+    "visualizationType": "hbar",
+    "state": {
+        "query": {
+            "measures": [
+                [
+                    "sum",
+                    "Amount"
+                ]
+            ],
+            "groups": [
+                [
+                    "Period_Year",
+                    "Period_Month"
+                ]
+            ]
+        }
+    },
+    "dataset": {
+        "id": "0Fb36000000Tj7rCAC",
+        "name": "Quota",
+        "url": "/services/data/v37.0/wave/datasets/0Fb36000000Tj7rCAC"
+    }
+}
