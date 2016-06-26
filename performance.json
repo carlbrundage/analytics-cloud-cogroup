@@ -1,0 +1,163 @@
+{
+    "label": "Performance",
+    "state": {
+        "steps": {
+            "Sales": {
+                "isFacet": true,
+                "isGlobal": false,
+                "query": {
+                    "pigql": "q = load \"Sales\"; q = group q by (Period_Year, Period_Month); q = foreach q generate Period_Year + \"~~~\" + Period_Month as 'Period_Year~~~Period_Month', sum(Price) as sum_Price ",
+                    "measures": [
+                        [
+                            "sum",
+                            "Price"
+                        ]
+                    ],
+                    "groups": [
+                        [
+                            "Period_Year",
+                            "Period_Month"
+                        ]
+                    ]
+                },
+                "selectMode": "single",
+                "type": "aggregate",
+                "useGlobal": true,
+                "start": null,
+                "datasets": [
+                    {
+                        "name": "Sales"
+                    }
+                ],
+                "visualizationParameters": {
+                    "visualizationType": "hbar"
+                }
+            },
+            "Quota": {
+                "isFacet": true,
+                "isGlobal": false,
+                "query": {
+                    "pigql": "q = load \"Quota\"; q = group q by (Period_Year, Period_Month); q = foreach q generate Period_Year + \"~~~\" + Period_Month as 'Period_Year~~~Period_Month', sum(Amount) as sum_Amount;",
+                    "measures": [
+                        [
+                            "sum",
+                            "Amount"
+                        ]
+                    ],
+                    "groups": [
+                        [
+                            "Period_Year",
+                            "Period_Month"
+                        ]
+                    ]
+                },
+                "selectMode": "single",
+                "type": "aggregate",
+                "useGlobal": true,
+                "start": null,
+                "datasets": [
+                    {
+                        "name": "Quota"
+                    }
+                ],
+                "visualizationParameters": {
+                    "visualizationType": "hbar"
+                }
+            },
+            "Quota_with_Sales": {
+                "isFacet": true,
+                "isGlobal": false,
+                "query": {
+                    "pigql": "q = load \"Quota\"; r = load \"Sales\"; s = cogroup q by (Period_Year, Period_Month) left, r by (Period_Year, Period_Month); s = foreach s generate q.Period_Year + \"~~~\" + q.Period_Month as 'Period_Year~~~Period_Month', sum(q.Amount) as sum_Amount, sum(r.Price) as sum_Price;",
+                    "measures": [
+                        [
+                            "sum",
+                            "Price"
+                        ],
+                        [
+                            "sum",
+                            "Amount"
+                        ]
+                    ],
+                    "groups": [
+                        [
+                            "Period_Year",
+                            "Period_Month"
+                        ]
+                    ]
+                },
+                "selectMode": "single",
+                "type": "aggregate",
+                "useGlobal": true,
+                "start": null,
+                "datasets": [
+                    {
+                        "name": "Quota"
+                    }
+                ],
+                "visualizationParameters": {
+                    "visualizationType": "hbar"
+                }
+            }
+        },
+        "widgets": {
+            "chart_2": {
+                "type": "chart",
+                "position": {
+                    "zIndex": 0,
+                    "x": 10,
+                    "y": 430,
+                    "w": 860,
+                    "h": 350
+                },
+                "parameters": {
+                    "step": "Quota",
+                    "exploreLink": false,
+                    "visualizationType": "hbar"
+                }
+            },
+            "chart_1": {
+                "type": "chart",
+                "position": {
+                    "zIndex": 2,
+                    "x": 660,
+                    "y": 0,
+                    "w": 350,
+                    "h": 420
+                },
+                "parameters": {
+                    "step": "Sales",
+                    "exploreLink": false,
+                    "visualizationType": "hbar"
+                }
+            },
+            "chart_3": {
+                "type": "chart",
+                "position": {
+                    "zIndex": 1,
+                    "x": 20,
+                    "y": 0,
+                    "w": 620,
+                    "h": 420
+                },
+                "parameters": {
+                    "step": "Quota_with_Sales",
+                    "dualAxis": false,
+                    "visualizationType": "combo",
+                    "selectModeOverride": "single"
+                }
+            }
+        },
+        "layouts": []
+    },
+    "datasets": [
+        {
+            "id": "0Fb36000000Tj7rCAC",
+            "name": "Quota"
+        },
+        {
+            "id": "0Fb36000000H2xTCAS",
+            "name": "Sales"
+        }
+    ]
+}
