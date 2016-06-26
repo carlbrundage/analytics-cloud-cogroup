@@ -1,0 +1,26 @@
+{
+    "name": "Sales",
+    "label": "Sales",
+    "visualizationType": "hbar",
+    "state": {
+        "query": {
+            "measures": [
+                [
+                    "sum",
+                    "Price"
+                ]
+            ],
+            "groups": [
+                [
+                    "Period_Year",
+                    "Period_Month"
+                ]
+            ]
+        }
+    },
+    "dataset": {
+        "id": "0Fb36000000H2xTCAS",
+        "name": "Sales",
+        "url": "/services/data/v37.0/wave/datasets/0Fb36000000H2xTCAS"
+    }
+}
